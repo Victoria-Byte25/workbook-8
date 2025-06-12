@@ -6,17 +6,12 @@ import java.util.Scanner;
 public class NorthwindTrader {
 
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/northwind";
-        String username = "root";
-        String password = "yearup";
-
         try (
                 Scanner scanner = new Scanner(System.in);
-                Connection connection = DriverManager.getConnection(url, username, password)
+                Connection connection = Database.getDataSource().getConnection()
         ) {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
             int choice;
+
             do {
                 choice = displayMenu(scanner);
 
@@ -32,7 +27,7 @@ public class NorthwindTrader {
 
             System.out.println("\nGoodbye! ");
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(" There was an error:");
             e.printStackTrace();
         }
